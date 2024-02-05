@@ -9,13 +9,13 @@ export class Game {
     protected isOver: boolean = false;
     protected level: number;
     protected objects: Point[];
-    // protected player: Player[];
+    protected player: Player[];
     protected players: Player[];
 
     constructor(level: number, objects: Point[], players: Player[], x: number, y: number) {
         
         this.level = level;
-        // this.player = player;
+        this.player = new Player("1","2",false,"red",1,1);
         this.display = new Display(new Drawer(1,1,1))
         this.objects = objects;
         this.players = players;
