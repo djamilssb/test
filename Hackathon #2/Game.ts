@@ -1,4 +1,3 @@
-import { Level } from "./level.js";
 import { Player } from "./Player.js";
 import { Point } from "./Point.js";
 import { Display } from "./Display.js";
@@ -16,7 +15,7 @@ export class Game {
         this.objects = objects;
         this.player = new Player("player-1", 'r', false, 'red', x, y);
         this.player = new Player("player-2", 'r', false, 'blue', x, y);
-        
+        this.players = players;
     }
     
 
