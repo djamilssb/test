@@ -5,6 +5,6 @@ export class Display {
     protected drawer : Drawer;
     
     constructor(drawer:Drawer) {
-        this.drawer = new Drawer(width, height)
+        this.drawer = new Drawer(8,8,8)
     }
 }
