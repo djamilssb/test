@@ -16,6 +16,7 @@ export class Game {
         
         this.level = level;
         this.player = new Player("1","2",false,"red",1,1);
+        
         this.display = new Display(new Drawer(1,1,1))
         this.objects = objects;
         this.players = players;
@@ -25,7 +26,6 @@ export class Game {
     }
 
     getObjects() {
-
         return this.objects
     
     }
