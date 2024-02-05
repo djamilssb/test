@@ -7,11 +7,11 @@ export class Point {
         this.y = y;
     }
 
-    getX() {
+    getPointX() {
         return this.x
     }
 
-    getY() {
+    getPointY() {
         return this.y
     }
 

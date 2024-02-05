@@ -24,4 +24,14 @@ export class Game {
 
     }
 
+    getObjects() {
+
+        return this.objects
+    }
+
+    getPlayers() {
+        
+        return this.players
+    }
+
 }
