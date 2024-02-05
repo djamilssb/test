@@ -1,5 +1,4 @@
-import { Movable } from "./Movable";
-import { Point } from "./Point";
+import { Movable } from "./Movable.js";
 
 export class Player extends Movable {
     protected id : string;
@@ -12,6 +11,14 @@ export class Player extends Movable {
         this.rev= rev;
         this.assigned= assigned;
         this.color= color;
+    }
+
+    getColor(){
+        return this.color
+    }
+    
+    getId(){
+        return this.id
     }
     
 }

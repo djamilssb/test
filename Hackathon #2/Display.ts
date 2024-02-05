@@ -7,4 +7,9 @@ export class Display {
     constructor(drawer:Drawer) {
         this.drawer = new Drawer(8,8,8)
     }
+
+    for(let i = 0 ; i < this.length ; i++){
+        this.drawRectangle()
+    }
+    }
 }
