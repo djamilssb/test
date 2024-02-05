@@ -12,7 +12,7 @@ export class Game {
     protected player: Player | undefined;
     protected players: Player[];
 
-    constructor(display: Display, isOver: string, level: number, objects: Point[], players: Player[], x: number, y: number) {
+    constructor(isOver: string, level: number, objects: Point[], players: Player[], x: number, y: number) {
         
         this.level = level;
         this.isOver = isOver;
