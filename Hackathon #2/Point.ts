@@ -15,4 +15,11 @@ export class Point {
         return this.y
     }
 
+   
+    touch(x:number,y:number){
+        if(x == this.x && this.y == y){
+            return true;
+        }
+    }
+
 }
