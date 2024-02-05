@@ -15,15 +15,18 @@ export class Level {
     protected playersStart: Point[];
     protected size: number[];
 
-    constructor(LEVELS:LevelData[],objects: Point,playersStart: Point[],size: number[]) {
+    constructor(LEVELS:LevelData[], objects: Point, playersStart: Point[], size: number[]) {
         this.LEVELS = LEVELS;
         this.objects = objects;
         this.playersStart = playersStart;
         this.size = size;
     }
 
-    get(LEVELS:number) {
-        return this.LEVELS;
+    
+    getLevel(level: number): LevelData {
+        return this.LEVELS[level];
     }
+  
+  
 
 }
