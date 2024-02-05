@@ -1,4 +1,5 @@
 import { Drawer } from "./Drawer.js";
+import { Game } from "./Game.js";
 
 export class Display {
 
@@ -6,10 +7,13 @@ export class Display {
     
     constructor(drawer:Drawer) {
         this.drawer = new Drawer(8,8,8)
-    }
+        }
+        
+        public (game: Game){
+            let player = game.getPlayers();
+            this.drawer.clear()
 
-    for(let i = 0 ; i < this.length ; i++){
-        this.drawRectangle()
-    }
-    }
+        }
+        
+    
 }

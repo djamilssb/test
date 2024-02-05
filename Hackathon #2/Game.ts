@@ -24,7 +24,6 @@ export class Game {
         
     }
 
-<<<<<<< Updated upstream
     getObjects() {
 
         return this.objects
@@ -34,8 +33,5 @@ export class Game {
         
         return this.players
     }
-=======
-    
->>>>>>> Stashed changes
 
 }
