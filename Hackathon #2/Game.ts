@@ -27,11 +27,19 @@ export class Game {
     getObjects() {
 
         return this.objects
+    
+    }
+
+    getPlayer() {
+
+        return this.player
+    
     }
 
     getPlayers() {
-        
+
         return this.players
+
     }
 
 }
