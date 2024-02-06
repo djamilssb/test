@@ -14,15 +14,14 @@ export class Display {
     public draw(Game: Game, players: Player[], level:Level) {
         this.drawer.clear()
         level.setData()
-
-         const salut = level.getData()
+        const salut = level.getData()
 
         for (let i = 0; i < players.length; i++) {
             this.drawer.drawCircle(players[i].getPointX(), players[i].getPointY(), players[i].getColor())
         }
     
         for (let i=0 ; i < level.setData().length ; i++) {
-
+            
         }
         
     }
