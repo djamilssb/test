@@ -4,6 +4,9 @@ import { Display } from "./Display.js";
 import { Drawer } from "./Drawer.js";
 import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
+import { Level } from "./Level.js";
+import { Wall } from "./Wall.js";
+import { Activable } from "./Activable.js";
 
 export class Game {
 
@@ -14,19 +17,20 @@ export class Game {
     protected player: Player;
     protected players: Player[];
 
-    constructor(level: number, objects: Point[], players: Player[], x: number, y: number, player:Player) {
-        
+    constructor(level: number, objects: Point[], players: Player[], x: number, y: number, player: Player) {
+
         this.level = level;
         this.player = player
-        this.display = new Display(new Drawer(1,1,1))
+        this.display = new Display(new Drawer(1, 1, 1))
         this.objects = objects;
         this.players = players;
-    
+
     }
 
     getObjects() {
         return this.objects
-    }
+    }   
+
     getPlayer() {
         return this.player
     }
@@ -35,34 +39,53 @@ export class Game {
     }
 
 
-    watchEvent() {
-        document.onkeydown = (e) => {            
+    moveObject(ob: Movable, dir: Direction) {
+
+        if (dir == Direction.BAS) {
+            ob.move(ob.getPointY() - 1, ob.getPointX())
+        }
+        else if (dir == Direction.HAUT) {
+            ob.move(ob.getPointY() + 1, ob.getPointX())
+        }
+        else if (dir == Direction.DROITE) {
+            ob.move(ob.getPointY(), ob.getPointX() - 1)
+        }
+        if (dir == Direction.HAUT) {
+            ob.move(ob.getPointY(), ob.getPointX() + 1)
+        }
+
+    }
+
+
+    handleEvent() {
+        document.onkeydown = (e) => {
             let addX = 0;
             let addY = 0;
 
-            let oldPosition = [this.player.getPointX() , this.player.getPointY()]
+            let oldPosition = [this.player.getPointX(), this.player.getPointY()]
             switch (e.keyCode) {
                 case 37:
-                    addX = -1
+                    this.moveObject(this.player, Direction.GAUCHE)
                     console.log("Vous êtes allé à gauche");
                     break;
                 case 39:
-                    addX = +1
+                    this.moveObject(this.player, Direction.DROITE)
                     console.log("Vous êtes allé à droite");
                     break;
                 case 38:
-                    addY = +1
+                    this.moveObject(this.player, Direction.HAUT)
                     console.log("Vous êtes allé en haut");
                     break;
                 case 40:
-                    addY = -1
+                    this.moveObject(this.player, Direction.BAS)
                     console.log("Vous êtes allé en bas");
                     break;
             }
-            this.player.move(this.player.getPointX()+addX,this.player.getPointY()+ addY);
         }
     }
 
-    
+
+
+
 
 }
