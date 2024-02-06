@@ -4,9 +4,6 @@ import { Display } from "./Display.js";
 import { Drawer } from "./Drawer.js";
 import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
-import { Level } from "./Level.js";
-import { Wall } from "./Wall.js";
-import { Activable } from "./Activable.js";
 
 export class Game {
 
@@ -56,13 +53,9 @@ export class Game {
 
     }
 
-
     handleEvent() {
         document.onkeydown = (e) => {
-            let addX = 0;
-            let addY = 0;
 
-            let oldPosition = [this.player.getPointX(), this.player.getPointY()]
             switch (e.keyCode) {
                 case 37:
                     this.moveObject(this.player, Direction.GAUCHE)
@@ -83,9 +76,4 @@ export class Game {
             }
         }
     }
-
-
-
-
-
 }
