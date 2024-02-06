@@ -21,8 +21,4 @@ export class Player extends Movable {
         return this.id
     }
 
-    move(x: number, y: number) {
-        this.x = x
-        this.y = y
-    }
 }

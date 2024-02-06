@@ -34,26 +34,6 @@ export class Game {
         return this.players
     }
 
-    Move(player:Player, dir: Direction) {
-        if (player.isMovable) {
-            let dx = 0;
-            let dy = 0;
-            switch (dir) {
-                case Direction.GAUCHE:
-                    dx = dx-1;
-                    break;
-                case Direction.DROITE:
-                    dx = dx+1;
-                    break;
-                case Direction.HAUT:
-                    dy = dy+1;
-                    break;
-                case Direction.BAS:
-                    dy = dy-1;
-                    break;
-            }
-        }
-    }
 
     watchEvent() {
         document.onkeydown = (e) => {            
