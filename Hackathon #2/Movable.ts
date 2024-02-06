@@ -1,6 +1,4 @@
 import { Point } from "./Point.js";
-import { Game } from "./Game.js";
-import { Player } from "./Player.js";
 export class Movable extends Point {
     public isMovable : boolean = false;
 

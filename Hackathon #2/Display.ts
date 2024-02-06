@@ -1,7 +1,5 @@
-import { Activable } from "./Activable.js";
 import { Drawer } from "./Drawer.js";
 import { Game } from "./Game.js";
-import { Wall } from "./Wall.js";
 import { Level } from "./Level.js";
 import { Player } from "./Player.js";
 
@@ -23,15 +21,9 @@ export class Display {
             this.drawer.drawCircle(players[i].getPointX(), players[i].getPointY(), players[i].getColor())
         }
     
-        for (let i=0 ; i < level.setData().length ; i++)
+        for (let i=0 ; i < level.setData().length ; i++) {
 
+        }
         
     }
-
-    
-
-
-}
-        
-    
 }
