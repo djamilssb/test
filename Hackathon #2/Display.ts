@@ -13,19 +13,22 @@ export class Display {
         this.drawer = new Drawer(8, 8, 8)
     }
 
-    public draw(level: Level, players: Player[]) {
-        let data = level.getLevel()
+    public draw(Game: Game, players: Player[], level:Level) {
         this.drawer.clear()
+        level.setData()
+
+         const salut = level.getData()
 
         for (let i = 0; i < players.length; i++) {
             this.drawer.drawCircle(players[i].getPointX(), players[i].getPointY(), players[i].getColor())
         }
+    
+        for (let i=0 ; i < level.setData().length ; i++)
 
-        for (let i = 0; i < data.length; i++) {
-            if (data[i] == 'wall') this.drawer.drawRectangle(data[i][0], data[i][1], W);
-            if (data[i] instanceof Activable) this.drawer.drawRectangle(data[i].getPointX(), data[i].getPointY());
-        }
+        
     }
+
+    
 
 
 }
