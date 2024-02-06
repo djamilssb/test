@@ -22,6 +22,7 @@ export class Display {
             if(wall instanceof Wall)  {
             for(let i = 0 ; i < wall.length ; i++){
                 this.drawer.drawRectangle(wall[i].getPointX(),wall[i].getPointY())
+
             }
         }
 

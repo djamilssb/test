@@ -1,10 +1,10 @@
 import { Point } from "./Point.js";
-
+import { Game } from "./Game.js";
+import { Player } from "./Player.js";
 export class Movable extends Point {
-    protected isMovable : boolean = false;
+    public isMovable : boolean = false;
 
     constructor(x:number,y:number) {
         super(x,y)
     }
-    
 }
