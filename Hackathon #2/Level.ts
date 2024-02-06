@@ -10,6 +10,7 @@ import { Point } from "./Point.js";
 
 
 export class Level {
+<<<<<<< Updated upstream
     protected levels = {
         "_id" : "levels",
         "values": [
@@ -22,11 +23,19 @@ export class Level {
           {}
         ]
       };
+=======
+    protected Levels: LevelData[];
+>>>>>>> Stashed changes
     protected objects: Point;
     protected playersStart: Point[];
     protected size: number[];
 
+<<<<<<< Updated upstream
     constructor(objects: Point, playersStart: Point[], size: number[]) {
+=======
+    constructor(Levels:LevelData[], objects: Point, playersStart: Point[], size: number[]) {
+        this.Levels = Levels;
+>>>>>>> Stashed changes
         this.objects = objects;
         this.playersStart = playersStart;
         this.size = size;
@@ -34,8 +43,16 @@ export class Level {
 
     
     getLevel() {
+<<<<<<< Updated upstream
         return this.levels;
     }  
+=======
+        return this.Levels
+    }
+
+   
+  
+>>>>>>> Stashed changes
   
 
 }
