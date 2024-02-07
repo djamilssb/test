@@ -115,11 +115,6 @@ export class Game {
      
         this.createLvl()
         this.display.draw(this)
-
-            for(let i = 0 ; wall.length ; i++){
-
-            }
-
         this.handleEvent()
     }
 
