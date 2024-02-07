@@ -4,6 +4,7 @@ import { Display } from "./Display.js";
 import { Drawer } from "./Drawer.js";
 import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
+import { Level } from "./Level.js";
 
 export class Game {
 
@@ -24,7 +25,7 @@ export class Game {
 
     }
 
-    getObjects() {
+    getObjects():Object[] {
         return this.objects
     }   
 
@@ -34,7 +35,6 @@ export class Game {
     getPlayers() {
         return this.players
     }
-
 
     moveObject(ob: Movable, dir: Direction) {
 

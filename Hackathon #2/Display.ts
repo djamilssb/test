@@ -23,6 +23,8 @@ export class Display {
     
         for (let i=0 ; i < level.setData().length ; i++) {
 
+            }
+
         }
         
     }
