@@ -16,13 +16,11 @@ export class Game {
     protected players: Player[];
 
     constructor(level: number, objects: Point[], players: Player[], x: number, y: number, player: Player) {
-
         this.level = level;
-        this.player = player
+        this.player = player;
         this.display = new Display(new Drawer(1, 1, 1))
         this.objects = objects;
         this.players = players;
-
     }
 
     getObjects():Object[] {
@@ -37,7 +35,6 @@ export class Game {
     }
 
     moveObject(ob: Movable, dir: Direction) {
-
         if (dir == Direction.BAS) {
             ob.move(ob.getPointY() - 1, ob.getPointX())
         }
@@ -50,12 +47,10 @@ export class Game {
         if (dir == Direction.HAUT) {
             ob.move(ob.getPointY(), ob.getPointX() + 1)
         }
-
     }
 
     handleEvent() {
         document.onkeydown = (e) => {
-
             switch (e.keyCode) {
                 case 37:
                     this.moveObject(this.player, Direction.GAUCHE)
