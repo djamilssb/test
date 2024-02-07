@@ -36,16 +36,16 @@ export class Game {
 
     moveObject(ob: Movable, dir: Direction) {
         if (dir == Direction.BAS) {
-            ob.move(ob.getPointY() - 1, ob.getPointX())
+            ob.move(ob.getY() - 1, ob.getX())
         }
         else if (dir == Direction.HAUT) {
-            ob.move(ob.getPointY() + 1, ob.getPointX())
+            ob.move(ob.getY() + 1, ob.getX())
         }
         else if (dir == Direction.DROITE) {
-            ob.move(ob.getPointY(), ob.getPointX() - 1)
+            ob.move(ob.getY(), ob.getX() - 1)
         }
         if (dir == Direction.HAUT) {
-            ob.move(ob.getPointY(), ob.getPointX() + 1)
+            ob.move(ob.getY(), ob.getX() + 1)
         }
     }
 

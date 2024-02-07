@@ -21,24 +21,33 @@ export class Level {
       {}
     ]
   };
-  protected objects: Point[];
-  protected playersStart: Point[];
-  protected size: number[];
+  protected objects: Point[] = [];
+  protected playersStart: Point[] = [];
+  protected size: number[] = [];
 
-  constructor(objects: Point[], playersStart: Point[], size: number[]) {
-    this.objects = objects;
-    this.playersStart = playersStart;
-    this.size = size;
-  }
+  constructor(level: number) {
+
+    const dataWall = this.data.values[level].walls
+    const dataActivable = this.data.values[level].endPlates
+    const dataPlayersStart = this.data.values[level].playersStart
+    const dataSize = this.data.values[level].size
+
+    if (dataPlayersStart != null) {
+
+      for (let i = 0; i < dataPlayersStart.length; i++) {
+        this.playersStart.push(new Point(dataPlayersStart[i][0], dataPlayersStart[i][1]))
+      }
+
+    }
 
 
-  getData() {
-    return this.data;
-  }
 
-  setData() {
-    const dataWall = this.data["values"][0]["walls"]
-    const dataActivable = this.data["values"][0]["endPlates"]
+    // probleme a corriger
+    /*if (dataSize != null) {
+      for (let i=0; i<dataSize.length; i++) {
+        this.size.push(dataSize[i])
+      }
+    }*/
 
     if (dataWall != null) {
       for (let i = 0; i < dataWall.length; i++) {
@@ -52,8 +61,19 @@ export class Level {
     }
   }
 
-  getObject(){
+
+  getObjects(): Point[] {
     return this.objects
   }
 
+  // getWall() {
+  //   const dataWall = this.data["values"][0]["walls"]
+  //   if (dataWall != null) {
+  //     for (let i = 0; i < dataWall.length; i++) {
+  //       this.objects.push(new Wall(dataWall[i][0], dataWall[i][1]))
+  //     }
+  //     return
+  //   }
+
+  // }
 }
