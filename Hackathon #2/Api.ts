@@ -1,16 +1,39 @@
-export class Api {
-    protected base : string;
-    protected islnit : boolean = false;
-    public source : EventSource;
+import { Point } from "./Point";
 
-    constructor(base:string,source:EventSource) {
-        this.base = base;
-        this.source = source;
-        window.addEventListener("keydown", this.handleKeyDown, true);
+export class Api {
+    protected static base : string = "https://sdw.mufasa.fr/portal" ;
+    protected static islnit : boolean = false;
+    public static source : EventSource;
+
+    constructor() {
     }
 
-    private handleKeyDown(event: KeyboardEvent) {
+    static async getData(toto:Point){
+        const Listdata = []
+        const response = await fetch(`${Api.base}/_all_docs`,{
+            method : 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
+        const result = await response.json();
+        console.log(result)
 
-        event.preventDefault();
+        for (let i=0; i< result.values.toto.length; i++) {
+            Listdata.push(result[i].toto)
+        }
+        return Listdata
+    }
+
+
+    static async getSize(){
+
+    }
+
+    static async getWalls(){
+    }
+
+    static async getEndPlates(){
+
     }
 }
