@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Drawer = void 0;
-class Drawer {
+export class Drawer {
     constructor(width, height, scale = 10) {
         this.scale = scale;
         const canvas = document.createElement('canvas');
@@ -25,4 +22,3 @@ class Drawer {
         this.ctx.fill();
     }
 }
-exports.Drawer = Drawer;

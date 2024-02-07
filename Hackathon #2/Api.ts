@@ -1,4 +1,3 @@
-import { Point } from "./Point";
 
 export class Api {
     protected static base : string = "https://sdw.mufasa.fr/portal" ;
@@ -8,7 +7,7 @@ export class Api {
     constructor() {
     }
 
-    static async getData(toto:Point){
+    static async getData(data:SVGAElement){
         const Listdata = []
         const response = await fetch(`${Api.base}/_all_docs`,{
             method : 'GET',
@@ -17,7 +16,7 @@ export class Api {
             },
         });
         const result = await response.json();
-        console.log(result)
+        // console.log(result)
 
         for (let i=0; i< result.values.toto.length; i++) {
             Listdata.push(result[i].toto)

@@ -1,21 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Display = void 0;
-const Drawer_js_1 = require("./Drawer.js");
-class Display {
-    constructor(drawer) {
-        this.drawer = new Drawer_js_1.Drawer(8, 8, 8);
+import { Activable } from "./Activable.js";
+import { Drawer } from "./Drawer.js";
+import { Wall } from "./Wall.js";
+export class Display {
+    constructor() {
+        this.drawer = new Drawer(26, 24, 28);
     }
-    public(game) {
-        let player = game.getPlayers();
-        let wall = game.getObjects;
+    draw(game) {
         this.drawer.clear();
-        for (let i = 0; i < player.length; i++) {
-            this.drawer.drawCircle(player[i].getPointX(), player[i].getPointY(), 'red');
+        const dataObjects = game.getObjects();
+        const dataPlayers = game.getPlayers();
+        for (let i = 0; i < dataPlayers.length; i++) {
+            this.drawer.drawCircle(dataPlayers[i].getX(), dataPlayers[i].getY(), 'red');
         }
-        for (let i = 0; i < wall.length; i++) {
-            this.drawer.drawRectangle(3, 3, 'pinks');
+        for (let i = 0; i < dataObjects.length; i++) {
+            if (dataObjects[i] instanceof Wall) {
+                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'black');
+            }
+            else if (dataObjects[i] instanceof Activable) {
+                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'purple');
+            }
         }
     }
 }
-exports.Display = Display;

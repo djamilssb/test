@@ -10,4 +10,8 @@ export class Movable extends Point {
         this.x = x
         this.y = y
     }
+
+    getMovable(){
+        return this.isMovable
+    }
 }

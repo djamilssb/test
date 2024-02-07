@@ -9,24 +9,24 @@ export class Display {
 
     protected drawer: Drawer;
 
-    constructor(drawer: Drawer) {
-        this.drawer = new Drawer(8, 8, 8)
+    constructor() {
+        this.drawer = new Drawer(26, 24, 28)
     }
 
-    public draw(game: Game, players: Player[], level: Level) {
+    public draw(game: Game) {
         this.drawer.clear()
-        const dataObjects = level.getObjects()
-        
-        for (let i = 0; i < players.length; i++) {
-            this.drawer.drawCircle(players[i].getX(), players[i].getY(), players[i].getColor())
+        const dataObjects = game.getObjects()
+        const dataPlayers = game.getPlayers()
+
+        for (let i = 0; i < dataPlayers.length; i++) {
+            this.drawer.drawCircle(dataPlayers[i].getX(), dataPlayers[i].getY(),'red')
         }
-
         for (let i = 0; i < dataObjects.length; i++) {
-            
-            this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'red')
-
-            if (dataObjects[i] instanceof Activable) {
-                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'red')
+            if (dataObjects[i] instanceof Wall) {
+                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'black')
+            }
+            else if (dataObjects[i] instanceof Activable) {
+                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'purple')
             }
         }
     }

@@ -1,4 +1,5 @@
 import { Activable } from "./Activable.js";
+import { Player } from "./Player.js";
 import { Point } from "./Point.js";
 
 // type LevelData = {
@@ -33,14 +34,10 @@ export class Level {
     const dataSize = this.data.values[level].size
 
     if (dataPlayersStart != null) {
-
       for (let i = 0; i < dataPlayersStart.length; i++) {
         this.playersStart.push(new Point(dataPlayersStart[i][0], dataPlayersStart[i][1]))
       }
-
     }
-
-
 
     // probleme a corriger
     /*if (dataSize != null) {
@@ -49,12 +46,12 @@ export class Level {
       }
     }*/
 
-    if (dataWall != null) {
+    if (dataWall) {
       for (let i = 0; i < dataWall.length; i++) {
         this.objects.push(new Wall(dataWall[i][0], dataWall[i][1]))
       }
     }
-    if (dataActivable != null) {
+    if (dataActivable) {
       for (let i = 0; i < dataActivable.length; i++) {
         this.objects.push(new Activable(dataActivable[i][0], dataActivable[i][1]))
       }
@@ -64,6 +61,10 @@ export class Level {
 
   getObjects(): Point[] {
     return this.objects
+  }
+
+  getPlayersStart(): Point[] {
+    return this.playersStart
   }
 
   // getWall() {
