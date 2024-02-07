@@ -20,5 +20,4 @@ export class Player extends Movable {
     getId() {
         return this.id
     }
-
 }
