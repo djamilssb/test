@@ -15,24 +15,19 @@ export class Display {
 
     public draw(game: Game, players: Player[], level: Level) {
         this.drawer.clear()
-        level.setData()
-        const dataObject = game.getObjects()
+        const dataObjects = level.getObjects()
         
-
         for (let i = 0; i < players.length; i++) {
-            this.drawer.drawCircle(players[i].getPointX(), players[i].getPointY(), players[i].getColor())
+            this.drawer.drawCircle(players[i].getX(), players[i].getY(), players[i].getColor())
         }
 
+        for (let i = 0; i < dataObjects.length; i++) {
+            
+            this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'red')
 
-        for (let i = 0; i < dataObject.length; i++) {
-            if (dataObject[i] instanceof Wall) {
-                this.drawer.drawCircle(dataObject[i][0], dataObject[i][1], 'red')
-            }
-
-            if (dataObject[i] instanceof Activable) {
-                this.drawer.drawCircle(dataObject[i][0], dataObject[i][1], 'red')
+            if (dataObjects[i] instanceof Activable) {
+                this.drawer.drawCircle(dataObjects[i].getX(), dataObjects[i].getY(), 'red')
             }
         }
-
     }
 }

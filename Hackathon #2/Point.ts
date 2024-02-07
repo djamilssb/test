@@ -7,19 +7,17 @@ export class Point {
         this.y = y;
     }
 
-    getPointX() {
+    getX() {
         return this.x
     }
 
-    getPointY() {
+    getY() {
         return this.y
     }
-
    
     touch(x:number,y:number){
         if(x == this.x && this.y == y){
             return true;
         }
     }
-
 }
