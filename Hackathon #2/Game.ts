@@ -13,7 +13,6 @@ export class Game {
     protected isOver: boolean = false;
     protected level: number = 1;
     protected objects: Point[] = [];
-    protected wall: number[][] | undefined = [];
     protected player: number = 0;
     protected players: Player[] = [];
 
@@ -33,21 +32,15 @@ export class Game {
         return this.players
     }
 
-    createLvl() {
-        let lvl = new Level(this.level)
-        let lvl = await Level.get(this.level)
-        this.wall = lvl.getWall(this.level)
-        let starts: Point[] = lvl.getPlayersStart()
-        let level = Api.getData("levels")
-        console.log(level)
-        // for(let p of starts){
-        //     this.players.push(new Player(p.getX(), p.getY()))
-        // }
+    async createLvl() {
+        let level:Level = await Level.get(this.level)
+        this.wall = level.getObjects()
+        
+        // let starts: Point[] = data.getPlayersStart()
 
         for (let i = 0; i < starts.length; i++) {
             this.players.push(new Player(starts[i].getX(), starts[i].getY()))
         }
-
     }
 
     moveObject(ob: Movable, dir: Direction) {

@@ -1,7 +1,6 @@
 
 export class Api {
     protected static base : string = "https://sdw.mufasa.fr/portal" ;
-    protected static islnit : boolean = false;
     public static source : EventSource;
 
     constructor() {
