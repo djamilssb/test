@@ -5,6 +5,7 @@ import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
 import { Level } from "./Level.js";
 import { Wall } from "./Wall.js";
+import { Api } from "./Api.js";
 
 export class Game {
 
@@ -33,12 +34,11 @@ export class Game {
     }
 
     createLvl() {
-        // console.log(this.players);
         let lvl = new Level(this.level)
-        this.objects = lvl.getObjects()
         this.wall = lvl.getWall(this.level)
         let starts: Point[] = lvl.getPlayersStart()
-
+        let level = Api.getData("levels")
+        console.log(level)
         // for(let p of starts){
         //     this.players.push(new Player(p.getX(), p.getY()))
         // }
@@ -51,9 +51,8 @@ export class Game {
 
     moveObject(ob: Movable, dir: Direction) {
         const oldPosition = [ob.getX(), ob.getY()]
-        console.log(this.wall)
-        
-        while(!ob.isMovable) {
+
+        // while(!ob.isMovable) { 
 
         if (dir == Direction.BAS) {
             ob.move(ob.getX(), ob.getY()+1)
@@ -68,13 +67,13 @@ export class Game {
             ob.move(ob.getX() - 1, ob.getY())
         }
     
-    }
+    // }
        
-        for ( let i = 0  ; i < this.wall?.length ; i++ ) {
+        /*for ( let i = 0  ; i < this.wall?.length ; i++ ) {
             if(ob.touch(this.wall[i][],this.wall[i][1])) {
                 ob.move(oldPosition[0],oldPosition[1])
             }   
-        }
+        }*/
        
 
     }

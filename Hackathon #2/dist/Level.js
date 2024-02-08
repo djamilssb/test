@@ -1,5 +1,5 @@
 import { Activable } from "./Activable.js";
-import { Point } from "./Point.js";
+import { Api } from "./Api.js";
 // type LevelData = {
 //     size : [number,number];
 //     walls : [number,number] [];
@@ -26,13 +26,14 @@ export class Level {
         this.size = [];
         const dataWall = this.data.values[level].walls;
         const dataActivable = this.data.values[level].endPlates;
-        const dataPlayersStart = this.data.values[level].playersStart;
+        const dataPlayersStart = Api.getData("levels");
+        dataPlayersStart;
         const dataSize = this.data.values[level].size;
-        if (dataPlayersStart != null) {
-            for (let i = 0; i < dataPlayersStart.length; i++) {
-                this.playersStart.push(new Point(dataPlayersStart[i][0], dataPlayersStart[i][1]));
-            }
-        }
+        /*if (dataPlayersStart != null) {
+          for (let i = 0; i < dataPlayersStart.length; i++) {
+            this.playersStart.push(new Point(dataPlayersStart[i][0], dataPlayersStart[i][1]))
+          }
+        }*/
         // probleme a corriger
         /*if (dataSize != null) {
           for (let i=0; i<dataSize.length; i++) {

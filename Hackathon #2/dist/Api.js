@@ -10,21 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 export class Api {
     constructor() {
     }
-    static getData(data) {
+    static getData(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const Listdata = [];
-            const response = yield fetch(`${Api.base}/_all_docs`, {
+            const response = yield fetch(`${Api.base}/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
             });
             const result = yield response.json();
-            // console.log(result)
-            for (let i = 0; i < result.values.toto.length; i++) {
-                Listdata.push(result[i].toto);
+            console.log(result);
+            /*for (let i=0; i< result.values.toto.length; i++) {
+                Listdata.push(result[i].toto)
             }
-            return Listdata;
+            return Listdata*/
         });
     }
     static getSize() {

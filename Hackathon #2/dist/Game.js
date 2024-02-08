@@ -2,6 +2,7 @@ import { Player } from "./Player.js";
 import { Display } from "./Display.js";
 import { Direction } from "./Direction.js";
 import { Level } from "./Level.js";
+import { Api } from "./Api.js";
 export class Game {
     constructor(level = 1) {
         this.isOver = false;
@@ -23,11 +24,11 @@ export class Game {
         return this.players;
     }
     createLvl() {
-        // console.log(this.players);
         let lvl = new Level(this.level);
-        this.objects = lvl.getObjects();
         this.wall = lvl.getWall(this.level);
         let starts = lvl.getPlayersStart();
+        let level = Api.getData("levels");
+        console.log(level);
         // for(let p of starts){
         //     this.players.push(new Player(p.getX(), p.getY()))
         // }
@@ -37,29 +38,25 @@ export class Game {
     }
     moveObject(ob, dir) {
         const oldPosition = [ob.getX(), ob.getY()];
-        console.log(this.wall);
-        while (!ob.isMovable) {
-            if (dir == Direction.BAS) {
-                ob.move(ob.getX(), ob.getY() + 1);
-            }
-            if (dir == Direction.HAUT) {
-                ob.move(ob.getX(), ob.getY() - 1);
-            }
-            if (dir == Direction.DROITE) {
-                ob.move(ob.getX() + 1, ob.getY());
-            }
-            if (dir == Direction.GAUCHE) {
-                ob.move(ob.getX() - 1, ob.getY());
-            }
+        // while(!ob.isMovable) { 
+        if (dir == Direction.BAS) {
+            ob.move(ob.getX(), ob.getY() + 1);
         }
-        // for ( let i = 0  ; i < this.objects.length ; i++ ) {
-        //     if(this.objects instanceof Wall){
-        //         wall.push(this.objects)
-        //     } 
-        //     if(ob.touch(wall[0],wall[1])) {
-        //         ob.move(oldPosition[0],oldPosition[1])
-        //     }   
+        if (dir == Direction.HAUT) {
+            ob.move(ob.getX(), ob.getY() - 1);
+        }
+        if (dir == Direction.DROITE) {
+            ob.move(ob.getX() + 1, ob.getY());
+        }
+        if (dir == Direction.GAUCHE) {
+            ob.move(ob.getX() - 1, ob.getY());
+        }
         // }
+        /*for ( let i = 0  ; i < this.wall?.length ; i++ ) {
+            if(ob.touch(this.wall[i][],this.wall[i][1])) {
+                ob.move(oldPosition[0],oldPosition[1])
+            }
+        }*/
     }
     handleEvent() {
         document.onkeydown = (e) => {
