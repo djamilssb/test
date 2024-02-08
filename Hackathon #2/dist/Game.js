@@ -1,16 +1,23 @@
-import { Player } from "./Player.js";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { Display } from "./Display.js";
 import { Direction } from "./Direction.js";
 import { Level } from "./Level.js";
-import { Api } from "./Api.js";
 export class Game {
     constructor(level = 1) {
         this.isOver = false;
         this.level = 1;
         this.objects = [];
-        this.wall = [];
         this.player = 0;
         this.players = [];
+        this.size = [];
         this.level = level;
         this.display = new Display();
     }
@@ -24,17 +31,18 @@ export class Game {
         return this.players;
     }
     createLvl() {
-        let lvl = new Level(this.level);
-        this.wall = lvl.getWall(this.level);
-        let starts = lvl.getPlayersStart();
-        let level = Api.getData("levels");
-        console.log(level);
-        // for(let p of starts){
-        //     this.players.push(new Player(p.getX(), p.getY()))
-        // }
-        for (let i = 0; i < starts.length; i++) {
-            this.players.push(new Player(starts[i].getX(), starts[i].getY()));
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            let level = yield Level.get(this.level);
+            this.objects = level.getObjects();
+            this.players = level.getPlayersStart();
+            this.size = level.getSize();
+            this.display.draw(this);
+            console.log(this.size);
+            let starts = level.getPlayersStart();
+            // for (let i = 0; i < starts.length; i++) {
+            //     this.players.push(new Player(starts[i].getX(), starts[i].getY()))
+            // }
+        });
     }
     moveObject(ob, dir) {
         const oldPosition = [ob.getX(), ob.getY()];
@@ -81,5 +89,8 @@ export class Game {
         this.createLvl();
         this.display.draw(this);
         this.handleEvent();
+    }
+    getSize() {
+        return this.size;
     }
 }

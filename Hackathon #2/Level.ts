@@ -11,10 +11,11 @@ type LevelData = {
 
 import { Wall } from "./Wall.js";
 import { Plate } from "./Plate.js";
+import { Player } from "./Player.js";
 export class Level {
 
   protected objects: Point[] = [];
-  protected playersStart: Point[] = []; 
+  protected playersStart: Player[] = []; 
   protected size: number[] = [];
 
   static async get(level:number) {
@@ -23,6 +24,11 @@ export class Level {
   }
 
   private constructor(data:LevelData) {
+
+    if(data.size) {
+      this.size.push(data.size[0],data.size[1])
+    }
+
     if (data.walls) {
       for (let i = 0; i < data.walls.length; i++) {
         this.objects.push(new Wall(data.walls[i][0], data.walls[i][1]))
@@ -33,6 +39,29 @@ export class Level {
         this.objects.push(new Plate(data.endPlates[i][0], data.endPlates[i][1]))
       }
     }
+    if (data.playersStart) {
+      for (let i = 0; i < data.playersStart.length; i++) {
+        this.playersStart.push(new Player(data.playersStart[i][0], data.playersStart[i][1]))
+      }
+    }
+
+    if(data.size) {
+      for(let i=0 ; i <= this.size[0] ; i++){
+        this.objects.push(new Wall(i,0))
+    }
+    for(let y=0 ; y <= this.size[1] ; y++) {
+        // this.drawer.drawRectangle(0,y,'purple')
+        this.objects.push(new Wall(0,y))
+    }
+    for(let j=0 ; j <= this.size[1] ; j++) {
+        // this.drawer.drawRectangle(this.size[0],j,'red')
+        this.objects.push(new Wall(this.size[0],j))
+    }
+    for(let j=0 ; j < this.size[0] ; j++) {
+        // this.drawer.drawRectangle(j,this.size[1],'red')
+        this.objects.push(new Wall(j,this.size[1]))
+    }
+    }
     
   }
 
@@ -40,8 +69,12 @@ export class Level {
     return this.objects
   }
 
-  getPlayersStart(): Point[] {
+  getPlayersStart(): Player[] {
     return this.playersStart
+  }
+
+  getSize():number[] {
+    return this.size
   }
 
 }

@@ -20,6 +20,7 @@ export class Api {
             });
             const result = yield response.json();
             console.log(result);
+            return result;
             /*for (let i=0; i< result.values.toto.length; i++) {
                 Listdata.push(result[i].toto)
             }
@@ -40,4 +41,3 @@ export class Api {
     }
 }
 Api.base = "https://sdw.mufasa.fr/portal";
-Api.islnit = false;

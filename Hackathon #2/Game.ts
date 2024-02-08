@@ -13,6 +13,7 @@ export class Game {
     protected objects: Point[] = [];
     protected player: number = 0;
     protected players: Player[] = [];
+    protected size: number[] = []
 
     constructor(level: number = 1) {
         this.level = level;
@@ -31,9 +32,13 @@ export class Game {
     async createLvl() {
         let level:Level = await Level.get(this.level)
         this.objects = level.getObjects()
+        this.players = level.getPlayersStart()
+        this.size = level.getSize()
         this.display.draw(this)
+    
+        console.log(this.size);
         
-        // let starts: Point[] = data.getPlayersStart()
+        let starts: Point[] = level.getPlayersStart()
 
         // for (let i = 0; i < starts.length; i++) {
         //     this.players.push(new Player(starts[i].getX(), starts[i].getY()))
@@ -84,5 +89,9 @@ export class Game {
         this.createLvl()
         this.display.draw(this)
         this.handleEvent()
+    }
+
+    getSize():number[]{
+        return this.size
     }
 }

@@ -1,53 +1,60 @@
-import { Activable } from "./Activable.js";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { Api } from "./Api.js";
-// type LevelData = {
-//     size : [number,number];
-//     walls : [number,number] [];
-//     endPlates : [number,number] [];
-//     playersStart : [number,number] [];
-// }
 import { Wall } from "./Wall.js";
+import { Plate } from "./Plate.js";
+import { Player } from "./Player.js";
 export class Level {
-    constructor(level) {
-        this.data = {
-            "_id": "levels",
-            "values": [
-                {
-                    "size": [26, 24],
-                    "walls": [[13, 1], [13, 2], [13, 3], [13, 4], [13, 5], [13, 6], [13, 7], [13, 8], [13, 9], [13, 10], [13, 11], [13, 12], [13, 13], [13, 14], [13, 15], [13, 16], [13, 17], [13, 18], [13, 19], [13, 20], [13, 21], [13, 22], [13, 23]],
-                    "endPlates": [[6, 4], [19, 20]],
-                    "playersStart": [[6, 20], [19, 4]]
-                },
-                {}
-            ]
-        };
+    static get(level) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const levels = yield Api.getData("levels");
+            return new Level(levels.values[level]);
+        });
+    }
+    constructor(data) {
         this.objects = [];
         this.playersStart = [];
         this.size = [];
-        const dataWall = this.data.values[level].walls;
-        const dataActivable = this.data.values[level].endPlates;
-        const dataPlayersStart = Api.getData("levels");
-        dataPlayersStart;
-        const dataSize = this.data.values[level].size;
-        /*if (dataPlayersStart != null) {
-          for (let i = 0; i < dataPlayersStart.length; i++) {
-            this.playersStart.push(new Point(dataPlayersStart[i][0], dataPlayersStart[i][1]))
-          }
-        }*/
-        // probleme a corriger
-        /*if (dataSize != null) {
-          for (let i=0; i<dataSize.length; i++) {
-            this.size.push(dataSize[i])
-          }
-        }*/
-        if (dataWall) {
-            for (let i = 0; i < dataWall.length; i++) {
-                this.objects.push(new Wall(dataWall[i][0], dataWall[i][1]));
+        if (data.size) {
+            this.size.push(data.size[0], data.size[1]);
+        }
+        if (data.walls) {
+            for (let i = 0; i < data.walls.length; i++) {
+                this.objects.push(new Wall(data.walls[i][0], data.walls[i][1]));
             }
         }
-        if (dataActivable) {
-            for (let i = 0; i < dataActivable.length; i++) {
-                this.objects.push(new Activable(dataActivable[i][0], dataActivable[i][1]));
+        if (data.endPlates) {
+            for (let i = 0; i < data.endPlates.length; i++) {
+                this.objects.push(new Plate(data.endPlates[i][0], data.endPlates[i][1]));
+            }
+        }
+        if (data.playersStart) {
+            for (let i = 0; i < data.playersStart.length; i++) {
+                this.playersStart.push(new Player(data.playersStart[i][0], data.playersStart[i][1]));
+            }
+        }
+        if (data.size) {
+            for (let i = 0; i <= this.size[0]; i++) {
+                this.objects.push(new Wall(i, 0));
+            }
+            for (let y = 0; y <= this.size[1]; y++) {
+                // this.drawer.drawRectangle(0,y,'purple')
+                this.objects.push(new Wall(0, y));
+            }
+            for (let j = 0; j <= this.size[1]; j++) {
+                // this.drawer.drawRectangle(this.size[0],j,'red')
+                this.objects.push(new Wall(this.size[0], j));
+            }
+            for (let j = 0; j < this.size[0]; j++) {
+                // this.drawer.drawRectangle(j,this.size[1],'red')
+                this.objects.push(new Wall(j, this.size[1]));
             }
         }
     }
@@ -57,13 +64,7 @@ export class Level {
     getPlayersStart() {
         return this.playersStart;
     }
-    getWall(level) {
-        const dataWall = this.data.values[level].walls;
-        if (dataWall) {
-            for (let i = 0; i < dataWall.length; i++) {
-                this.objects.push(new Wall(dataWall[i][0], dataWall[i][1]));
-            }
-        }
-        return dataWall;
+    getSize() {
+        return this.size;
     }
 }
