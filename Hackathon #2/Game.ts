@@ -4,8 +4,7 @@ import { Display } from "./Display.js";
 import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
 import { Level } from "./Level.js";
-import { Wall } from "./Wall.js";
-import { Api } from "./Api.js";
+
 
 export class Game {
 
@@ -34,13 +33,14 @@ export class Game {
 
     async createLvl() {
         let level:Level = await Level.get(this.level)
-        this.wall = level.getObjects()
+        this.objects = level.getObjects()
+        this.display.draw(this)
         
         // let starts: Point[] = data.getPlayersStart()
 
-        for (let i = 0; i < starts.length; i++) {
-            this.players.push(new Player(starts[i].getX(), starts[i].getY()))
-        }
+        // for (let i = 0; i < starts.length; i++) {
+        //     this.players.push(new Player(starts[i].getX(), starts[i].getY()))
+        // }
     }
 
     moveObject(ob: Movable, dir: Direction) {
@@ -73,9 +73,7 @@ export class Game {
     }
 
     handleEvent() {
-
         document.onkeydown = (e) => {
-
             switch (e.keyCode) {
                 case 37:
                     this.moveObject(this.players[this.player], Direction.GAUCHE)
@@ -91,8 +89,6 @@ export class Game {
                     break;
             }
             this.display.draw(this)
-
-
         }
 
     }

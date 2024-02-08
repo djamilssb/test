@@ -1,12 +1,9 @@
-import { Activable } from "./Activable";
+import { Activable } from "./Activable.js";
 
-export class Plate {
+export class Plate extends Activable {
 
-    constructor(){
-
+    constructor(x:number , y:number){
+        super(x,y)
     }
 
-    endPlate(){}
-
-    presurePlate(){}
 }

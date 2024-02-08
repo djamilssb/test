@@ -1,5 +1,4 @@
 import { Activable } from "./Activable.js";
-import { Player } from "./Player.js";
 import { Point } from "./Point.js";
 import { Api } from "./Api.js";
 
@@ -11,6 +10,7 @@ type LevelData = {
 }
 
 import { Wall } from "./Wall.js";
+import { Plate } from "./Plate.js";
 export class Level {
 
   protected objects: Point[] = [];
@@ -30,7 +30,7 @@ export class Level {
     }
     if (data.endPlates) {
       for (let i = 0; i < data.endPlates.length; i++) {
-        this.objects.push(new Activable(data.endPlates[i][0], data.endPlates[i][1]))
+        this.objects.push(new Plate(data.endPlates[i][0], data.endPlates[i][1]))
       }
     }
     
