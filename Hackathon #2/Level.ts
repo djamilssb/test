@@ -22,14 +22,19 @@ export class Level {
   //     {}
   //   ]
   // };
-  protected data = Api.getData("levels")
   protected objects: Point[] = [];
-  protected playersStart: Point[] = [];
+  protected playersStart: Point[] = []; 
   protected size: number[] = [];
 
-  constructor(level: number) {
+  static async get(level:number) {
+    const levels = await Api.getData("levels")
+    levels.values[level]
+    return new Level()
+  }
 
-    const dataWall = this.data.values[level].walls
+  private constructor(level: number) {
+    
+    const dataWall = JSON.stringify(this.data.values[level].walls)
     const dataActivable = this.data.values[level].endPlates
     const dataPlayersStart = this.data.values[level].playersStart
     const dataSize = this.data.values[level].size

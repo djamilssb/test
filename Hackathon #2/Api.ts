@@ -16,6 +16,7 @@ export class Api {
         });
         const result = await response.json();
         console.log(result)
+        return result
 
         /*for (let i=0; i< result.values.toto.length; i++) {
             Listdata.push(result[i].toto)

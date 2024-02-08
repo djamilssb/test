@@ -35,6 +35,7 @@ export class Game {
 
     createLvl() {
         let lvl = new Level(this.level)
+        let lvl = await Level.get(this.level)
         this.wall = lvl.getWall(this.level)
         let starts: Point[] = lvl.getPlayersStart()
         let level = Api.getData("levels")
