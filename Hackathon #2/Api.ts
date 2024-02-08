@@ -23,15 +23,12 @@ export class Api {
         return Listdata*/
     }
 
-
     static async getSize(){
-
     }
 
     static async getWalls(){
     }
 
     static async getEndPlates(){
-
     }
 }

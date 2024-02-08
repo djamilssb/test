@@ -7,7 +7,6 @@ import { Level } from "./Level.js";
 
 
 export class Game {
-
     protected display: Display;
     protected isOver: boolean = false;
     protected level: number = 1;
@@ -19,7 +18,6 @@ export class Game {
         this.level = level;
         this.display = new Display()
     }
-
     getObjects(): Point[] {
         return this.objects
     }
@@ -30,7 +28,6 @@ export class Game {
     getPlayers() {
         return this.players
     }
-
     async createLvl() {
         let level:Level = await Level.get(this.level)
         this.objects = level.getObjects()
@@ -42,12 +39,9 @@ export class Game {
         //     this.players.push(new Player(starts[i].getX(), starts[i].getY()))
         // }
     }
-
     moveObject(ob: Movable, dir: Direction) {
         const oldPosition = [ob.getX(), ob.getY()]
-
         // while(!ob.isMovable) { 
-
         if (dir == Direction.BAS) {
             ob.move(ob.getX(), ob.getY()+1)
         }
@@ -60,18 +54,13 @@ export class Game {
         if (dir == Direction.GAUCHE) {
             ob.move(ob.getX() - 1, ob.getY())
         }
-    
     // }
-       
         /*for ( let i = 0  ; i < this.wall?.length ; i++ ) {
             if(ob.touch(this.wall[i][],this.wall[i][1])) {
                 ob.move(oldPosition[0],oldPosition[1])
             }   
         }*/
-       
-
     }
-
     handleEvent() {
         document.onkeydown = (e) => {
             switch (e.keyCode) {
@@ -90,15 +79,10 @@ export class Game {
             }
             this.display.draw(this)
         }
-
     }
-
     play() {
-     
         this.createLvl()
         this.display.draw(this)
         this.handleEvent()
     }
-
-
 }

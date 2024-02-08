@@ -10,17 +10,14 @@ export class Drawer {
       this.ctx = canvas.getContext('2d') as CanvasRenderingContext2D
       document.body.appendChild(canvas)
     }
-  
     clear() {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
     }
-  
     drawRectangle(x: number, y: number, color: string) {
       this.ctx.beginPath()
       this.ctx.fillStyle = color
       this.ctx.fillRect(x * this.scale, y * this.scale, this.scale, this.scale)
     }
-  
     drawCircle(x: number, y: number, color: string) {
       this.ctx.beginPath()
       this.ctx.fillStyle = color
