@@ -35,6 +35,7 @@ export class Game {
         // console.log(this.players);
         let lvl = new Level(this.level)
         this.objects = lvl.getObjects()
+
         let starts: Point[] = lvl.getPlayersStart()
 
         // for(let p of starts){
