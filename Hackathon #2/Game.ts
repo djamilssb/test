@@ -12,6 +12,7 @@ export class Game {
     protected isOver: boolean = false;
     protected level: number = 1;
     protected objects: Point[] = [];
+    protected wall: number[][] | undefined = [];
     protected player: number = 0;
     protected players: Player[] = [];
 
@@ -35,6 +36,7 @@ export class Game {
         // console.log(this.players);
         let lvl = new Level(this.level)
         this.objects = lvl.getObjects()
+        this.wall = lvl.getWall(this.level)
         let starts: Point[] = lvl.getPlayersStart()
 
         // for(let p of starts){
@@ -49,31 +51,27 @@ export class Game {
 
     moveObject(ob: Movable, dir: Direction) {
         const oldPosition = [ob.getX(), ob.getY()]
-        const wall = []
-      
+        console.log(this.wall)
+        
+        while(!ob.isMovable) {
 
         if (dir == Direction.BAS) {
             ob.move(ob.getX(), ob.getY()+1)
-            console.log(ob.getY())
         }
         if (dir == Direction.HAUT) {
             ob.move(ob.getX(), ob.getY()-1)
-            console.log(ob.getY())
         }
         if (dir == Direction.DROITE) {
             ob.move(ob.getX() + 1, ob.getY())
-            console.log(ob.getX())
         }
         if (dir == Direction.GAUCHE) {
             ob.move(ob.getX() - 1, ob.getY())
-            console.log(ob.getX())
         }
-        while(this.objects.m)
-        for ( let i = 0  ; i < this.objects.length ; i++ ) {
-            if(this.objects instanceof Wall){
-                wall.push(this.objects)
-            } 
-            if(ob.touch(wall[0],wall[1])) {
+    
+    }
+       
+        for ( let i = 0  ; i < this.wall?.length ; i++ ) {
+            if(ob.touch(this.wall[i][],this.wall[i][1])) {
                 ob.move(oldPosition[0],oldPosition[1])
             }   
         }
@@ -84,31 +82,26 @@ export class Game {
     handleEvent() {
 
         document.onkeydown = (e) => {
-            this.display.draw(this)
 
             switch (e.keyCode) {
-                
                 case 37:
                     this.moveObject(this.players[this.player], Direction.GAUCHE)
-                    console.log("Vous êtes allé à gauche");
                     break;
                 case 39:
                     this.moveObject(this.players[this.player], Direction.DROITE)
-                    console.log("Vous êtes allé à droite");
                     break;
                 case 38:
                     this.moveObject(this.players[this.player], Direction.HAUT)
-                    console.log("Vous êtes allé en haut");
                     break;
                 case 40:
                     this.moveObject(this.players[this.player], Direction.BAS)
-                    console.log("Vous êtes allé en bas");
-                    this.display.draw(this)
                     break;
             }
             this.display.draw(this)
 
+
         }
+
     }
 
     play() {

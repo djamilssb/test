@@ -1,6 +1,6 @@
 import { Point } from "./Point.js";
 export class Movable extends Point {
-    public isMovable : boolean = false;
+    public isMovable : boolean = true;
 
     constructor(x:number,y:number) {
         super(x,y)
@@ -11,7 +11,7 @@ export class Movable extends Point {
         this.y = y
     }
 
-    getMovable(){
+    getMovable():boolean{
         return this.isMovable
     }
 }

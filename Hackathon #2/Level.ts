@@ -67,6 +67,16 @@ export class Level {
     return this.playersStart
   }
 
+  getWall(level:number):number[][]|undefined{
+    const dataWall = this.data.values[level].walls
+    if (dataWall) {
+      for (let i = 0; i < dataWall.length; i++) {
+        this.objects.push(new Wall(dataWall[i][0], dataWall[i][1]))
+      }
+    }
+    return dataWall
+  }
+
   // getWall() {
   //   const dataWall = this.data["values"][0]["walls"]
   //   if (dataWall != null) {
