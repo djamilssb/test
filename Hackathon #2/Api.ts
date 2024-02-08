@@ -7,21 +7,20 @@ export class Api {
     constructor() {
     }
 
-    static async getData(data:SVGAElement){
-        const Listdata = []
-        const response = await fetch(`${Api.base}/_all_docs`,{
+    static async getData(id:string){
+        const response = await fetch(`${Api.base}/${id}`,{
             method : 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
         });
         const result = await response.json();
-        // console.log(result)
+        console.log(result)
 
-        for (let i=0; i< result.values.toto.length; i++) {
+        /*for (let i=0; i< result.values.toto.length; i++) {
             Listdata.push(result[i].toto)
         }
-        return Listdata
+        return Listdata*/
     }
 
 
