@@ -1,5 +1,6 @@
 import { Activable } from "./Activable.js";
 import { Drawer } from "./Drawer.js";
+import { EndPlate } from "./EndPlate.js";
 import { Game } from "./Game.js";
 import { Plate } from "./Plate.js";
 import { Wall } from "./Wall.js";

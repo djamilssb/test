@@ -40,11 +40,12 @@ export class Level {
     }
     if (data.playersStart) {
       for (let i = 0; i < data.playersStart.length; i++) {
-        this.playersStart.push(new Player(data.playersStart[i][0], data.playersStart[i][1]))
+        this.playersStart.push(new Player(data.playersStart[i][0], data.playersStart[i][1] ,))
       }
     }
 
     if (data.size) {
+      
       for (let i = 0; i <= this.size[0]; i++) {
         this.objects.push(new Wall(i, 0))
       }

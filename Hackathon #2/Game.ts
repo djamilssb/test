@@ -15,7 +15,7 @@ export class Game {
     protected isOver: boolean = false;
     protected level: number = 1;
     protected objects: Point[] = [];
-    protected player: number = 0;
+    protected player: Player | undefined;
     protected players: Player[] = [];
     protected size: number[] = []
 
@@ -94,21 +94,22 @@ export class Game {
 
     handleEvent() {
         document.onkeydown = (e) => {
-            switch (e.keyCode) {
-                case 37:
-                    this.moveObject(this.players[this.player], Direction.GAUCHE)
-                    break;
-                case 39:
-                    this.moveObject(this.players[this.player], Direction.DROITE)
-                    break;
-                case 38:
-                    this.moveObject(this.players[this.player], Direction.HAUT)
-                    break;
-                case 40:
-                    this.moveObject(this.players[this.player], Direction.BAS)
-                    break;
+            if (this.player != undefined) {
+                switch (e.keyCode) {
+                    case 37:
+                        this.moveObject(this.player, Direction.GAUCHE)
+                        break;
+                    case 39:
+                        this.moveObject(this.player, Direction.DROITE)
+                        break;
+                    case 38:
+                        this.moveObject(this.player, Direction.HAUT)
+                        break;
+                    case 40:
+                        this.moveObject(this.player, Direction.BAS)
+                        break;
+                }
             }
-            this.display.draw(this)
         }
     }
     play() {
@@ -128,5 +129,14 @@ export class Game {
 
     getLevel() {
         return this.level
+    }
+
+    selectPlayer() {
+
+        let player = this.players.find(player => !player.getAssigned())
+        if (player) {
+          player.assign()
+          this.player
+        }
     }
 }
