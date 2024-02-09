@@ -7,6 +7,7 @@ import { Level } from "./Level.js";
 import { Wall } from "./Wall.js";
 import { EndPlate } from "./EndPlate.js";
 import { Plate } from "./Plate.js";
+import { Api } from "./Api.js";
 
 
 export class Game {
@@ -38,9 +39,15 @@ export class Game {
         this.players = level.getPlayersStart()
         this.size = level.getSize()
         this.display.draw(this)
+
+        Api.addEventListener(function (obj:any) {
+            if(obj._id ==)
+        })
+
         let starts: Point[] = level.getPlayersStart()
     }
     moveObject(ob: Movable, dir: Direction) {
+    
         const oldPosition = [ob.getX(), ob.getY()]
         if (dir == Direction.BAS) {
             ob.move(ob.getX(), ob.getY() + 1)
@@ -58,7 +65,7 @@ export class Game {
 
         // Pour passer let SetActive a true 
         for (let i = 0; i < this.objects.length; i++) {
-           
+
 
             // if (this.objects[i] instanceof Plate && this.objects[i].touch(ob)) {
             //     Position.push(new Plate(this.objects[i].getX(), this.objects[i].getY()))
@@ -72,12 +79,10 @@ export class Game {
             if (this.objects[i] instanceof Plate && this.objects[i].touch(ob)) {
                 (this.objects[i] as Plate).setActive()
             }
-            
+
             if (this.objects[i] instanceof Plate && !this.objects[i].touch(ob)) {
                 (this.objects[i] as Plate).falseActive()
             }
-            
-            console.log(this.objects[i])
             // Pour bloquer les mouvements sur les murs et Walls 
             if (this.objects[i] instanceof Wall && this.objects[i].touch(ob) || this.players[i] instanceof Player && this.players[i].touch(ob)) {
                 ob.move(oldPosition[0], oldPosition[1])
@@ -107,12 +112,21 @@ export class Game {
         }
     }
     play() {
+        Api.addEventListener(function (obj:any) {
+            if(obj._id ==)
+        })
         this.createLvl()
         this.display.draw(this)
         this.handleEvent()
+
+
     }
 
     getSize(): number[] {
         return this.size
+    }
+
+    getLevel() {
+        return this.level
     }
 }

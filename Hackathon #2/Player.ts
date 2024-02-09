@@ -1,14 +1,15 @@
+import { Api } from "./Api.js";
 import { Movable } from "./Movable.js";
 
 export class Player extends Movable {
-    // protected id: string;
+    protected id: string
     // protected rev: string;
     // protected assigned: boolean;
     // protected color: string;
 
-    constructor(x:number,y:number) {
+    constructor(x: number, y: number, id: string) {
         super(x, y)
-        // this.id = id;
+        this.id = id;
         // this.rev = rev;
         // this.assigned = assigned;
         // this.color = color;
@@ -17,8 +18,15 @@ export class Player extends Movable {
     getColor() {
         return 'red'
     }
-
     getId() {
-        return '0'
+        return this.id
+    }
+
+    compareId(): boolean {
+        const id = this.getId()
+        Api.addEventListener(function (obj: any) {
+            if (obj._id == id) return true
+        })
+        return false
     }
 }
