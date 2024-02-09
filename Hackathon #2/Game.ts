@@ -4,6 +4,9 @@ import { Display } from "./Display.js";
 import { Movable } from "./Movable.js";
 import { Direction } from "./Direction.js";
 import { Level } from "./Level.js";
+import { Wall } from "./Wall.js";
+import { EndPlate } from "./EndPlate.js";
+import { Plate } from "./Plate.js";
 
 
 export class Game {
@@ -30,28 +33,21 @@ export class Game {
         return this.players
     }
     async createLvl() {
-        let level:Level = await Level.get(this.level)
+        let level: Level = await Level.get(this.level)
         this.objects = level.getObjects()
         this.players = level.getPlayersStart()
         this.size = level.getSize()
         this.display.draw(this)
-    
-        console.log(this.size);
-        
         let starts: Point[] = level.getPlayersStart()
-
-        // for (let i = 0; i < starts.length; i++) {
-        //     this.players.push(new Player(starts[i].getX(), starts[i].getY()))
-        // }
     }
     moveObject(ob: Movable, dir: Direction) {
         const oldPosition = [ob.getX(), ob.getY()]
-        // while(!ob.isMovable) { 
         if (dir == Direction.BAS) {
-            ob.move(ob.getX(), ob.getY()+1)
+            ob.move(ob.getX(), ob.getY() + 1)
         }
         if (dir == Direction.HAUT) {
-            ob.move(ob.getX(), ob.getY()-1)
+            ob.move(ob.getX(), ob.getY() - 1)
+
         }
         if (dir == Direction.DROITE) {
             ob.move(ob.getX() + 1, ob.getY())
@@ -59,13 +55,38 @@ export class Game {
         if (dir == Direction.GAUCHE) {
             ob.move(ob.getX() - 1, ob.getY())
         }
-    // }
-        /*for ( let i = 0  ; i < this.wall?.length ; i++ ) {
-            if(ob.touch(this.wall[i][],this.wall[i][1])) {
-                ob.move(oldPosition[0],oldPosition[1])
-            }   
-        }*/
+
+        // Pour passer let SetActive a true 
+        for (let i = 0; i < this.objects.length; i++) {
+           
+
+            // if (this.objects[i] instanceof Plate && this.objects[i].touch(ob)) {
+            //     Position.push(new Plate(this.objects[i].getX(), this.objects[i].getY()))
+
+            // for (let i = 0; i < Position.length; i++) {
+            //     Position[i].setActive()
+            //     console.log(Position[i].getActive())
+            // }
+            // }
+
+            if (this.objects[i] instanceof Plate && this.objects[i].touch(ob)) {
+                (this.objects[i] as Plate).setActive()
+            }
+            
+            if (this.objects[i] instanceof Plate && !this.objects[i].touch(ob)) {
+                (this.objects[i] as Plate).falseActive()
+            }
+            
+            console.log(this.objects[i])
+            // Pour bloquer les mouvements sur les murs et Walls 
+            if (this.objects[i] instanceof Wall && this.objects[i].touch(ob) || this.players[i] instanceof Player && this.players[i].touch(ob)) {
+                ob.move(oldPosition[0], oldPosition[1])
+            }
+
+        }
+
     }
+
     handleEvent() {
         document.onkeydown = (e) => {
             switch (e.keyCode) {
@@ -91,7 +112,7 @@ export class Game {
         this.handleEvent()
     }
 
-    getSize():number[]{
+    getSize(): number[] {
         return this.size
     }
 }

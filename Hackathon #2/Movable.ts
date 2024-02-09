@@ -14,4 +14,8 @@ export class Movable extends Point {
     getMovable():boolean{
         return this.isMovable
     }
+    setMovable():boolean {
+        this.isMovable = false
+        return this.isMovable
+    }
 }
